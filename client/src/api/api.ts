@@ -1,7 +1,8 @@
 // src/api/api.ts
 import axios from "axios";
 
-const API_URL = "https://white-carrot-app.onrender.com/api"; 
+//const API_URL = "https://white-carrot-app.onrender.com/api"; 
+const API_URL = "https://white-carrot-app.onrender.com"; 
 
 const api = axios.create({
   baseURL: API_URL,
