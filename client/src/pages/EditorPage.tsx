@@ -174,7 +174,7 @@ const EditorPage: React.FC = () => {
           id: Date.now().toString(),
           type: "custom",
           title: "New Section",
-          content: "Add your content here...",
+          content: "",
           order: prev.sections.length,
         },
       ],
@@ -493,7 +493,7 @@ const EditorPage: React.FC = () => {
                       ? "Tell your story..."
                       : section.type === "culture"
                         ? "Describe your culture..."
-                        : ""
+                        : "Add your content here..."
                   }
                   onChange={(e) =>
                     updateSection(section.id, "content", e.target.value)
