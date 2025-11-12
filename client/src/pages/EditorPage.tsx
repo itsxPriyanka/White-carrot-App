@@ -470,20 +470,12 @@ const EditorPage: React.FC = () => {
                 </div>
 
                 <textarea
-  value={section.content}
-  onChange={(e) =>
-    updateSection(section.id, "content", e.target.value)
-  }
-  placeholder={
-    section.title.toLowerCase().includes("story")
-      ? "Tell your story..."
-      : section.title.toLowerCase().includes("culture")
-      ? "Describe your culture..."
-      : "Add your content here..."
-  }
-  className="w-full px-3 py-2 border border-gray-300 rounded-lg min-h-[100px] placeholder-gray-400"
-/>
-
+                  value={section.content}
+                  onChange={(e) =>
+                    updateSection(section.id, "content", e.target.value)
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg min-h-[100px]"
+                />
               </div>
             ))}
           </div>
