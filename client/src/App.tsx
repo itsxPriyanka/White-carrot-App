@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/Login";
 import EditorPage from "./pages/EditorPage";
 import PreviewPage from "./pages/PreviewPage";
