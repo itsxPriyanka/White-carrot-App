@@ -179,6 +179,7 @@ const EditorPage: React.FC = () => {
         },
       ],
     }));
+    toast.success("New section added")
   };
 
   const updateSection = (id: string, field: keyof Section, value: string) => {
@@ -195,6 +196,7 @@ const EditorPage: React.FC = () => {
       ...prev,
       sections: prev.sections.filter((s) => s.id !== id),
     }));
+    toast.success("Section deleted")
   };
 
   const moveSection = (id: string, direction: "up" | "down") => {
