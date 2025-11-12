@@ -8,7 +8,7 @@ const PreviewPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen">
-      {/* ✅ Top Preview Banner */}
+      {/* Top Preview Banner */}
       <div className="bg-yellow-100 border-b border-yellow-300 px-4 py-3 text-center sticky top-0 z-20">
         <span className="font-medium text-yellow-800">
           You’re viewing a live preview of your Careers page
@@ -21,7 +21,7 @@ const PreviewPage: React.FC = () => {
         </button>
       </div>
 
-      {/* ✅ Actual Careers Page Reuse */}
+      {/* Actual Careers Page Reuse */}
       {slug ? <CareersPage /> : <p className="text-center mt-10">Invalid preview URL</p>}
     </div>
   );

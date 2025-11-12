@@ -62,7 +62,7 @@ const CareersPage: React.FC = () => {
   });
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch company and filters
+  // Fetch company and filters
   useEffect(() => {
     if (!slug) return;
 
@@ -88,7 +88,7 @@ const CareersPage: React.FC = () => {
     load();
   }, [slug]);
 
-  // ✅ Fetch jobs whenever filters change
+  // Fetch jobs whenever filters change
   useEffect(() => {
     if (!company || !slug) return;
 

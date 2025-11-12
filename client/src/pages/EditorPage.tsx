@@ -76,7 +76,7 @@ const EditorPage: React.FC = () => {
   });
   const [saving, setSaving] = useState(false);
 
-  // ✅ Fetch company data
+  // Fetch company data
   useEffect(() => {
     if (!slug) return;
     const fetchCompany = async () => {
@@ -99,7 +99,7 @@ const EditorPage: React.FC = () => {
     fetchCompany();
   }, [slug]);
 
-  // ✅ Fetch jobs for this company
+  // Fetch jobs for this company
   useEffect(() => {
     if (!slug) return;
     const loadJobs = async () => {
@@ -115,7 +115,7 @@ const EditorPage: React.FC = () => {
     loadJobs();
   }, [slug]);
 
-  // ✅ Save company settings
+  // Save company settings
   const handleSave = async () => {
     if (!slug) return;
     setSaving(true);
@@ -131,7 +131,7 @@ const EditorPage: React.FC = () => {
     }
   };
 
-  // ✅ Publish company page
+  // Publish company page
   const handlePublish = async () => {
     await handleSave();
     try {
@@ -142,14 +142,14 @@ const EditorPage: React.FC = () => {
     }
   };
 
-  // ✅ Navigation handlers
+  // Navigation handlers
   const handlePreview = () => navigate(`/${slug}/preview`);
   const handleLogout = () => {
     localStorage.removeItem("companySlug");
     navigate("/");
   };
 
-  // ✅ Section Management
+  // Section Management
   const addSection = () => {
     setFormData((prev) => ({
       ...prev,
@@ -199,7 +199,7 @@ const EditorPage: React.FC = () => {
     setFormData({ ...formData, sections: newSections });
   };
 
-  // ✅ Job Management Handlers
+  // Job Management Handlers
   const handleAddJob = async () => {
     if (!slug || !newJob.title) {
       alert("Please provide a job title.");
@@ -243,15 +243,15 @@ const EditorPage: React.FC = () => {
         setJobs((prev) =>
           prev.filter((job) => job._id !== id && job.id !== id)
         );
-        alert("✅ Job deleted successfully!");
+        alert("Job deleted successfully!");
       } else {
         alert(
-          "❌ Failed to delete job: " + (res.data.message || "Unknown error")
+          "Failed to delete job: " + (res.data.message || "Unknown error")
         );
       }
     } catch (error) {
       console.error("Delete job error:", error);
-      alert("⚠️ Server error while deleting job.");
+      alert("Server error while deleting job.");
     }
   };
 
@@ -471,6 +471,13 @@ const EditorPage: React.FC = () => {
 
                 <textarea
                   value={section.content}
+                  placeholder={
+                    section.type === "about"
+                      ? "Tell your story..."
+                      : section.type === "culture"
+                      ? "Describe your culture..."
+                      : ""
+                  }
                   onChange={(e) =>
                     updateSection(section.id, "content", e.target.value)
                   }
@@ -481,7 +488,7 @@ const EditorPage: React.FC = () => {
           </div>
         </div>
 
-        {/* ✅ JOB MANAGEMENT SECTION */}
+        {/* JOB MANAGEMENT SECTION */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <h2 className="text-xl font-bold mb-4">Job Management</h2>
 

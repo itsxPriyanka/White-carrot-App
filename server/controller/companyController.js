@@ -64,8 +64,8 @@ exports.loginRecruiter = async (req, res) => {
           banner: '',
           cultureVideo: '',
           sections: [
-            { id: '1', type: 'about', title: 'About Us', content: 'Tell your story...', order: 0 },
-            { id: '2', type: 'culture', title: 'Life at Company', content: 'Describe your culture...', order: 1 },
+            { id: '1', type: 'about', title: 'About Us', content: '', order: 0 },
+            { id: '2', type: 'culture', title: 'Life at Company', content: '', order: 1 },
           ],
         },
       });
