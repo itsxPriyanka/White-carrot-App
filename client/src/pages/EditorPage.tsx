@@ -20,6 +20,7 @@ import {
   publishCompany,
   updateCompany,
 } from "../api/api";
+import toast, { Toaster } from "react-hot-toast";
 
 interface Section {
   id: string;
@@ -123,7 +124,7 @@ const EditorPage: React.FC = () => {
       const res = await updateCompany(slug, formData);
 
       setCompany(res.data);
-      alert("Changes saved successfully!");
+      toast.success("Changes saved successfully!")
     } catch (error) {
       console.error("Save error:", error);
     } finally {
@@ -136,7 +137,21 @@ const EditorPage: React.FC = () => {
     await handleSave();
     try {
       await publishCompany(slug!);
-      alert(`Page published! Share your link: /${slug}/careers`);
+      toast.success(
+        <div className="max-w-[400px] break-words">
+          Page published! <br />
+          Share your link:{" "}
+          <a
+            href={`https://whitecarrot.netlify.app/${slug}/careers`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline break-all"
+          >
+            https://whitecarrot.netlify.app/{slug}/careers
+          </a>
+        </div>,
+        { duration: 5000 }
+      );
     } catch (error) {
       console.error("Publish error:", error);
     }
@@ -202,7 +217,7 @@ const EditorPage: React.FC = () => {
   // Job Management Handlers
   const handleAddJob = async () => {
     if (!slug || !newJob.title) {
-      alert("Please provide a job title.");
+      toast.error("Please provide a job title.");
       return;
     }
 
@@ -218,7 +233,7 @@ const EditorPage: React.FC = () => {
           department: "",
           description: "",
         });
-        alert("Job added successfully!");
+        toast.success("Job added successfully!");
       }
     } catch (error) {
       console.error("Add job error:", error);
@@ -227,7 +242,7 @@ const EditorPage: React.FC = () => {
 
   const handleDeleteJob = async (id?: string) => {
     if (!id) {
-      alert("Invalid job ID");
+      toast.error("Invalid job ID");
       return;
     }
 
@@ -243,15 +258,15 @@ const EditorPage: React.FC = () => {
         setJobs((prev) =>
           prev.filter((job) => job._id !== id && job.id !== id)
         );
-        alert("Job deleted successfully!");
+        toast.success("Job deleted successfully!");
       } else {
-        alert(
+        toast.error(
           "Failed to delete job: " + (res.data.message || "Unknown error")
         );
       }
     } catch (error) {
       console.error("Delete job error:", error);
-      alert("Server error while deleting job.");
+      toast.error("Server error while deleting job.");
     }
   };
 
@@ -475,8 +490,8 @@ const EditorPage: React.FC = () => {
                     section.type === "about"
                       ? "Tell your story..."
                       : section.type === "culture"
-                      ? "Describe your culture..."
-                      : ""
+                        ? "Describe your culture..."
+                        : ""
                   }
                   onChange={(e) =>
                     updateSection(section.id, "content", e.target.value)
@@ -587,6 +602,7 @@ const EditorPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-center" />
     </div>
   );
 };
