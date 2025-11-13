@@ -27,6 +27,7 @@ npm install
 Create a `.env` file inside **backend** with:
 
 MONGO_URI=<your-mongo-url>
+
 PORT=4000
 
 
