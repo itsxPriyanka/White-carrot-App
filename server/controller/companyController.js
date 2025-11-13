@@ -52,7 +52,6 @@ exports.loginRecruiter = async (req, res) => {
   try {
     let company = await Company.findOne({ recruiterEmail: email });
 
-    // CREATE A NEW COMPANY IF EMAIL NOT FOUND
     if (company) {
       if (name && name.trim() !== company.name.trim()) {
         return res.status(400).json({

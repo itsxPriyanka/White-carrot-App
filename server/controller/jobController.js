@@ -45,6 +45,8 @@ exports.seedJobs = async (req, res) => {
   }
 };
 
+
+
 exports.deleteJob = async (req, res) => {
   try {
     const deleted = await Job.findByIdAndDelete(req.params.id);
