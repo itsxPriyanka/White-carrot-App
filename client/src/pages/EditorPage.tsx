@@ -415,7 +415,7 @@ const EditorPage: React.FC = () => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Video size={16} className="inline mr-1" /> Culture Video URL
                 (YouTube embed)
@@ -429,9 +429,10 @@ const EditorPage: React.FC = () => {
                 placeholder="https://www.youtube.com/embed/..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg"
               />
-            </div>
+            </div> */}
+            
           </div>
-        </div>
+        </div> 
 
         {/* Content Sections */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">

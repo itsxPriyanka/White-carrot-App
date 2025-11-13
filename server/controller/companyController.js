@@ -54,15 +54,11 @@ exports.loginRecruiter = async (req, res) => {
 
     // CREATE A NEW COMPANY IF EMAIL NOT FOUND
     if (!company) {
-      const rawName = name || email.split('@')[0];
+      const slug = slugify(name || email.split('@')[0], { lower: true, strict: true });
 
-      // 🔥 UNIQUE SLUG LOGIC
-      let baseSlug = slugify(rawName, { lower: true, strict: true });
-      let slug = baseSlug;
-      let counter = 1;
-
-      while (await Company.findOne({ slug })) {
-        slug = `${baseSlug}-${counter++}`;
+      const nameExists = await Company.findOne({ name });
+      if (nameExists) {
+        return res.status(400).json({ success: false, message: "Name already exists" });
       }
 
       company = new Company({

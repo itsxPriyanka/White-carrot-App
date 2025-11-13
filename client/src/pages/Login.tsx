@@ -27,9 +27,9 @@ const LoginPage: React.FC = () => {
       } else {
         setError(data.message || "Invalid credentials");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
-      setError("Something went wrong. Please try again.");
+      setError(error.response.data.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

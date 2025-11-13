@@ -131,11 +131,11 @@ const CareersPage: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Banner */}
       {company.settings?.banner && (
-        <div className="w-full h-64 bg-gray-200 overflow-hidden">
+        <div className="w-100 h-64 bg-gray-200 overflow-hidden">
           <img
             src={company.settings.banner}
             alt="Company banner"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover "
           />
         </div>
       )}
