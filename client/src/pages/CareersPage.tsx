@@ -281,9 +281,11 @@ const CareersPage: React.FC = () => {
                 No jobs found matching your criteria
               </div>
             ) : (
-              jobs.map((job) => (
+              jobs.map((job, index) => (
+
                 <div
-                  key={job.id}
+                  key={job.id || index}
+
                   className="border rounded-lg p-6 hover:shadow-lg transition cursor-pointer"
                   style={{
                     borderColor: `${brandColor}80`,

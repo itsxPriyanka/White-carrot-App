@@ -429,9 +429,9 @@ const EditorPage: React.FC = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg"
               />
             </div> */}
-            
+
           </div>
-        </div> 
+        </div>
 
         {/* Content Sections */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
@@ -570,9 +570,14 @@ const EditorPage: React.FC = () => {
               <p className="text-gray-500">No jobs added yet.</p>
             ) : (
               <ul className="space-y-3">
-                {jobs.map((job) => (
+                {/* {jobs.map((job) => (
                   <li
                     key={job.id}
+                    className="border border-gray-200 rounded-lg p-4 flex justify-between items-start"
+                  > */}
+                {jobs.map((job, index) => (
+                  <li
+                    key={job.id || job._id || index}
                     className="border border-gray-200 rounded-lg p-4 flex justify-between items-start"
                   >
                     <div>
