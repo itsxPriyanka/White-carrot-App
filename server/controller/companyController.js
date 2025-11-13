@@ -53,32 +53,40 @@ exports.loginRecruiter = async (req, res) => {
     let company = await Company.findOne({ recruiterEmail: email });
 
     // CREATE A NEW COMPANY IF EMAIL NOT FOUND
-    if (!company) {
-      const slug = slugify(name || email.split('@')[0], { lower: true, strict: true });
-
-      const nameExists = await Company.findOne({ name });
-      if (nameExists) {
-        return res.status(400).json({ success: false, message: "Name already exists" });
+    if (company) {
+      if (name && name.trim() !== company.name.trim()) {
+        return res.status(400).json({
+          success: false,
+          message: "Company name does not match the registered company",
+        });
       }
 
-      company = new Company({
-        name: name || 'My Company',
-        slug,
-        recruiterEmail: email,
-        settings: {
-          brandColor: '#3b82f6',
-          logo: '',
-          banner: '',
-          cultureVideo: '',
-          sections: [
-            { id: '1', type: 'about', title: 'About Us', content: '', order: 0 },
-            { id: '2', type: 'culture', title: 'Life at Company', content: '', order: 1 },
-          ],
-        },
-      });
-
-      await company.save();
+      return res.json({ success: true, token: 'mock-jwt', company });
     }
+    const slug = slugify(name || email.split('@')[0], { lower: true, strict: true });
+
+    const nameExists = await Company.findOne({ name });
+    if (nameExists) {
+      return res.status(400).json({ success: false, message: "Name already exists" });
+    }
+
+    company = new Company({
+      name: name || 'My Company',
+      slug,
+      recruiterEmail: email,
+      settings: {
+        brandColor: '#3b82f6',
+        logo: '',
+        banner: '',
+        cultureVideo: '',
+        sections: [
+          { id: '1', type: 'about', title: 'About Us', content: '', order: 0 },
+          { id: '2', type: 'culture', title: 'Life at Company', content: '', order: 1 },
+        ],
+      },
+    });
+
+    await company.save();
 
     res.json({ success: true, token: 'mock-jwt', company });
   } catch (error) {
