@@ -8,7 +8,6 @@ import {
   Save,
   Share2,
   LogOut,
-  Video,
   ImageIcon,
 } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
