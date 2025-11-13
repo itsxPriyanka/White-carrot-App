@@ -52,8 +52,19 @@ exports.loginRecruiter = async (req, res) => {
   try {
     let company = await Company.findOne({ recruiterEmail: email });
 
+    // CREATE A NEW COMPANY IF EMAIL NOT FOUND
     if (!company) {
-      const slug = slugify(name || email.split('@')[0], { lower: true, strict: true });
+      const rawName = name || email.split('@')[0];
+
+      // 🔥 UNIQUE SLUG LOGIC
+      let baseSlug = slugify(rawName, { lower: true, strict: true });
+      let slug = baseSlug;
+      let counter = 1;
+
+      while (await Company.findOne({ slug })) {
+        slug = `${baseSlug}-${counter++}`;
+      }
+
       company = new Company({
         name: name || 'My Company',
         slug,
@@ -69,6 +80,7 @@ exports.loginRecruiter = async (req, res) => {
           ],
         },
       });
+
       await company.save();
     }
 
