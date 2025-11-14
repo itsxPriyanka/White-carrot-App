@@ -105,8 +105,6 @@ const EditorPage: React.FC = () => {
     const loadJobs = async () => {
       try {
         const res = await getJobs({ companySlug: slug });
-        console.log("Jobs fetched:", res.data);
-
         setJobs(res.data);
       } catch (err) {
         console.error("Error fetching jobs:", err);
@@ -225,19 +223,25 @@ const EditorPage: React.FC = () => {
     try {
       const res = await addJob(slug, newJob);
 
-      if (res.data.success) {
-        const savedJob = res.data.jobs[0]; // MongoDB job
-        setJobs((prev) => [...prev, savedJob]);
-        setNewJob({ title: "", location: "", jobType: "", department: "", description: "" });
+      if (res.data.success && res.data.jobs) {
+        // Add the newly created job(s) from the seed endpoint
+        setJobs((prev) => [...prev, ...res.data.jobs]);
+        setNewJob({
+          title: "",
+          location: "",
+          jobType: "",
+          department: "",
+          description: "",
+        });
         toast.success("Job added successfully!");
       }
-
     } catch (error) {
       console.error("Add job error:", error);
+      toast.error("Failed to add job");
     }
   };
 
-  const handleDeleteJob = async (id?: string) => {
+  const handleDeleteJob = async (id?: any) => {
     if (!id) {
       toast.error("Invalid job ID");
       return;
@@ -593,7 +597,7 @@ const EditorPage: React.FC = () => {
                       )}
                     </div>
                     <button
-                      onClick={() => handleDeleteJob(job._id || job.id)}
+                      onClick={() => handleDeleteJob(job._id)}
                       className="text-red-600 hover:text-red-800 text-sm font-medium"
                     >
                       Delete

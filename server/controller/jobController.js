@@ -35,18 +35,16 @@ exports.getJobFilters = async (req, res) => {
 // Seed jobs for a company
 exports.seedJobs = async (req, res) => {
   const { companySlug, jobs } = req.body;
-
   try {
     const inserted = await Job.insertMany(
       jobs.map((job) => ({ ...job, companySlug }))
     );
-
-    res.json({ success: true, jobs: inserted });
+    res.json({ success: true, count: inserted.length, jobs: inserted });
   } catch (err) {
+    console.error('Error seeding jobs:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
-
 
 
 

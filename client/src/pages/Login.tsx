@@ -22,7 +22,6 @@ const LoginPage: React.FC = () => {
 
       if (data.success && data.company) {
         localStorage.setItem("companySlug", data.company.slug);
-        console.log("Navigating to editor page...");
         navigate(`/${data.company.slug}/edit`);
       } else {
         setError(data.message || "Invalid credentials");
