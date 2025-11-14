@@ -226,16 +226,12 @@ const EditorPage: React.FC = () => {
       const res = await addJob(slug, newJob);
 
       if (res.data.success) {
-        setJobs((prev) => [...prev, newJob]);
-        setNewJob({
-          title: "",
-          location: "",
-          jobType: "",
-          department: "",
-          description: "",
-        });
+        const savedJob = res.data.jobs[0]; // MongoDB job
+        setJobs((prev) => [...prev, savedJob]);
+        setNewJob({ title: "", location: "", jobType: "", department: "", description: "" });
         toast.success("Job added successfully!");
       }
+
     } catch (error) {
       console.error("Add job error:", error);
     }
